@@ -13,8 +13,4 @@ public class PlayerDefaultData: ScriptableObject, IPlayerData
     public AnimationCurve rotationTurnSpeedCurve { get; set; }
     [field: SerializeField,BoxGroup("Rotation")]
     public PlayerInGameData.RotationType rotationType { get; set; }
-
-    public float extraSpeed;
-    
-    
 }

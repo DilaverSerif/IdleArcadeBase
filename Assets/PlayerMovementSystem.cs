@@ -81,12 +81,13 @@ public class PlayerMovementSystem : PlayerSystem
     //</summary>
     public Vector3 Move()
     {
-        TargetPosition = GetMovePosition() * MoveSpeedCurve.Evaluate(CurrentWalkTime);
+        var targetPosition = GetMovePosition() * MoveSpeedCurve.Evaluate(CurrentWalkTime);
+        targetPosition.y = -9.81f;
+        
+        _characterController.Move(targetPosition * Time.deltaTime);
 
-        TargetPosition.y = -9.81f;
-        _characterController.Move(TargetPosition * Time.deltaTime);
-
-        return TargetPosition;
+        TargetPosition = targetPosition;
+        return targetPosition;
     }
 
     //<summary>
@@ -95,13 +96,13 @@ public class PlayerMovementSystem : PlayerSystem
     //</summary>
     public Vector3 MoveByTarget(Vector3 targetPosition)
     {
-        TargetPosition = Joystick.Instance.Direction3D;
-        TargetPosition.y = -9.81f;
-        var currentPosition = TargetPosition * MoveSpeedCurve.Evaluate(CurrentWalkTime);
+        // TargetPosition = Joystick.Instance.Direction3D;
+        targetPosition.y = -9.81f;
+        var currentPosition = targetPosition * MoveSpeedCurve.Evaluate(CurrentWalkTime);
 
         _characterController.Move(currentPosition * Time.deltaTime);
 
-        return TargetPosition;
+        return targetPosition;
     }
 
     //<summary>
