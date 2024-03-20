@@ -118,7 +118,9 @@ public class PlayerMovementSystem : PlayerSystem
         if (!(Mathf.Abs(jsDirection.x) > 0.1f) && !(Mathf.Abs(jsDirection.z) > 0.1f)) return default;
 
         TargetRotation = Quaternion.Euler(0f, joystickAngle, 0);
+        Debug.Log("Diff Angel:"+GetDifferenceAngle(joystickAngle));
         var currentRotationSpeed = RotationTurnSpeedCurve.Evaluate(GetDifferenceAngle(joystickAngle));
+        Debug.Log("Current RotationSpeed:"+currentRotationSpeed);
 
         var rotation = transform.rotation;
 
@@ -149,7 +151,7 @@ public class PlayerMovementSystem : PlayerSystem
 
         TargetRotation = Quaternion.Euler(0f, joystickAngle, 0f);
         var currentRotationSpeed = RotationTurnSpeedCurve.Evaluate(GetDifferenceAngle(joystickAngle));
-
+        Debug.Log("Current RotationSpeed:"+currentRotationSpeed);
         var rotation = transform.rotation;
 
         rotation = RotationType switch
@@ -173,6 +175,22 @@ public class PlayerMovementSystem : PlayerSystem
     }
     public float GetDifferenceAngle(float targetAngle)
     {
-        return Quaternion.Angle(transform.rotation, TargetRotation) - targetAngle;
+        return Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle));
+    }
+
+    public override void OnDrawGizmos()
+    {
+        if(!debug) return;
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, TargetPosition);
+    }
+
+    public override void OnGUI()
+    {
+        if(!debug) return;
+        
+        GUI.Label(new Rect(10, 10, 100, 20), "CurrentWalkTime: " + CurrentWalkTime);
+        GUI.Label(new Rect(10, 30, 100, 20), "CurrentMaxWalkTime: " + CurrentMaxWalkTime);
     }
 }

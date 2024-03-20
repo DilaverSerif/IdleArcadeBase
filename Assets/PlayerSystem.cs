@@ -1,6 +1,7 @@
 using UnityEngine;
 public abstract class PlayerSystem
 {
+    public bool debug = false;
     [HideInInspector]
     public PlayerBrain playerBrain;
     protected Transform transform => playerBrain.transform;

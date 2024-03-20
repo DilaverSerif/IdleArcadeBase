@@ -12,12 +12,15 @@ public class PlayerBrain : MonoBehaviour
     [BoxGroup("Player Data")]
     public PlayerDefaultData defaultData;
 
-    [BoxGroup("Player Systems"), ReadOnly]
+    [BoxGroup("Player Systems")]
     public PlayerAnimationSystem playerAnimation;
-    [BoxGroup("Player Systems"), ReadOnly]
+    [BoxGroup("Player Systems")]
     public PlayerMovementSystem playerMovement;
-    [BoxGroup("Player Systems"), ReadOnly]
+    [BoxGroup("Player Systems")]
     public PlayerSoundSystem playerSound;
+    
+    public StatUser statUser;
+    public HealthSystem healthSystem;
 
     private StateMachine<Enum_PlayerState, PlayerStateEventData> stateMachine;
 
@@ -27,7 +30,7 @@ public class PlayerBrain : MonoBehaviour
         playerAnimation = new PlayerAnimationSystem(this, GetComponentInChildren<Animator>());
         playerMovement = new PlayerMovementSystem(this, GetComponent<CharacterController>());
         playerSound = new PlayerSoundSystem(this);
-        inGameData = new PlayerInGameData(defaultData);
+        inGameData = new PlayerInGameData(this);
 
         stateMachine = new StateMachine<Enum_PlayerState, PlayerStateEventData>();
     }
@@ -55,5 +58,11 @@ public class PlayerBrain : MonoBehaviour
     void FixedUpdate()
     {
         stateMachine.OnLogic();
+        playerMovement.Move();  
+    }
+
+    void OnDisable()
+    {
+        inGameData.Dispose();
     }
 }
