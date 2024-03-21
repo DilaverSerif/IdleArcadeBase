@@ -5,8 +5,10 @@ namespace ComboSystem.Player
 {
     public enum Enum_PlayerState
     {
+        None = 0,
         Idle,
         Walk,
+        Targeting,
         Run,
     }
     
