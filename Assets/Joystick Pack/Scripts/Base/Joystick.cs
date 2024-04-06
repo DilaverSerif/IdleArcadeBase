@@ -10,6 +10,7 @@ public class Joystick : Singleton<Joystick>, IPointerDownHandler, IDragHandler, 
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
     public Vector3 Direction3D { get { return new Vector3(Horizontal, 0, Vertical); } }
     public bool Touching { get { return input != Vector2.zero; } }
+    public Vector3 LastDirection { get; protected set; }
 
     public float HandleRange
     {
@@ -34,13 +35,21 @@ public class Joystick : Singleton<Joystick>, IPointerDownHandler, IDragHandler, 
     [SerializeField] private bool snapY = false;
 
     [SerializeField] protected RectTransform background = null;
-    [SerializeField] private RectTransform handle = null;
+    [SerializeField] protected RectTransform handle = null;
     private RectTransform baseRect = null;
 
     private Canvas canvas;
     private Camera cam;
 
     private Vector2 input = Vector2.zero;
+
+    public Vector3 GetDirection(bool lastDirection)
+    {
+        if(Direction3D == Vector3.zero && lastDirection)
+            return LastDirection;
+        
+        return Direction3D;
+    }
 
     protected virtual void Start()
     {

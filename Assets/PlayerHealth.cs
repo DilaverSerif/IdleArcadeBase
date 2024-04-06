@@ -12,4 +12,8 @@ public class PlayerHealth : HealthSystem
     {
         throw new System.NotImplementedException();
     }
+    public override WarSide GetWarSide()
+    {
+        return WarSide.PlayerSide;
+    }
 }

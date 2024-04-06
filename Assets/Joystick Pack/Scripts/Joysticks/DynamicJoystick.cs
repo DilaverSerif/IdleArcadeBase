@@ -25,6 +25,7 @@ public class DynamicJoystick : Joystick
 
     public override void OnPointerUp(PointerEventData eventData)
     {
+        LastDirection = new Vector3(Horizontal, 0, Vertical);
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
     }

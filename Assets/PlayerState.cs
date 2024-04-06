@@ -8,12 +8,9 @@ namespace ComboSystem.Player
         None = 0,
         Idle,
         Walk,
-        Targeting,
+        WalkTargeting,
+        IdleTargeting,
         Run,
-    }
-    
-    namespace ComboSystem.Player
-    {
     }
     
     public abstract class PlayerState : State<Enum_PlayerState, PlayerStateEventData>

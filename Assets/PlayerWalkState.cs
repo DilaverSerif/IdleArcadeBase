@@ -16,6 +16,7 @@ public class PlayerWalkState : PlayerState
     public override void OnLogic()
     {
         PlayerBrain.playerMovement.Rotate();
+        PlayerBrain.playerMovement.Move();
         PlayerBrain.playerMovement.LocomotionRaise();
     }
 

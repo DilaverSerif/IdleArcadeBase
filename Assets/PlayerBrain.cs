@@ -25,6 +25,7 @@ public class PlayerBrain : MonoBehaviour
     {
         attackSystem = GetComponent<PlayerAttackSystem>();
         healthSystem = GetComponent<HealthSystem>();
+        healthSystem.InitializeHealthSystem(defaultData.maxHealth);
         
         playerAnimation = new PlayerAnimationSystem(this, GetComponentInChildren<Animator>());
         playerMovement = new PlayerMovementSystem(this, GetComponent<CharacterController>());
@@ -36,7 +37,11 @@ public class PlayerBrain : MonoBehaviour
     void FixedUpdate()
     {
         playerStateMachine.StateMachine.OnLogic();
-        playerMovement.Move();  
+    }
+    
+    private void Update()
+    {
+        playerAnimation.OnUpdate();
     }
 
     void OnDisable()

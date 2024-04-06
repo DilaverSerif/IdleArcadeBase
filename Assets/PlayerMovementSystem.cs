@@ -18,6 +18,7 @@ public class PlayerMovementSystem : PlayerSystem
 
     private float MaxWalkTime => playerBrain.inGameData.moveSpeedCurve.keys[playerBrain.inGameData.moveSpeedCurve.length - 1].time;
     private float Acceleration => playerBrain.inGameData.acceleration;
+    private float MaxSpeed => playerBrain.inGameData.maxSpeed;
 
     private AnimationCurve MoveSpeedCurve => playerBrain.inGameData.moveSpeedCurve;
     private AnimationCurve RotationTurnSpeedCurve => playerBrain.inGameData.rotationTurnSpeedCurve;
@@ -102,6 +103,21 @@ public class PlayerMovementSystem : PlayerSystem
 
         _characterController.Move(currentPosition * Time.deltaTime);
 
+        return targetPosition;
+    }
+    
+    //<summary>
+    //  Son joystick son durumununa göre hareket ettirmeyi sürdürür
+    //</summary>
+    
+    public Vector3 MoveLastJoystick()
+    {
+        var targetPosition = Joystick.Instance.LastDirection * MoveSpeedCurve.Evaluate(CurrentWalkTime);
+        targetPosition.y = -9.81f;
+        
+        _characterController.Move(targetPosition * Time.deltaTime);
+
+        TargetPosition = targetPosition;
         return targetPosition;
     }
 
@@ -192,5 +208,9 @@ public class PlayerMovementSystem : PlayerSystem
         
         GUI.Label(new Rect(10, 10, 100, 20), "CurrentWalkTime: " + CurrentWalkTime);
         GUI.Label(new Rect(10, 30, 100, 20), "CurrentMaxWalkTime: " + CurrentMaxWalkTime);
+    }
+    public float GetCurrentSpeed()
+    {
+        return _characterController.velocity.magnitude / MaxSpeed;
     }
 }

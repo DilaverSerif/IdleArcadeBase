@@ -4,6 +4,12 @@ public abstract class HealthSystem : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    public void InitializeHealthSystem(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
+    }
+    
     public virtual void TakeDamage(HitData hitData)
     {
         if(currentHealth <= 0) return;
@@ -25,4 +31,5 @@ public abstract class HealthSystem : MonoBehaviour
     public abstract void Die();
     public abstract void Revive();
     public abstract void Hit();
+    public abstract WarSide GetWarSide();
 }

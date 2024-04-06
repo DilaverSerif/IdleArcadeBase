@@ -11,6 +11,7 @@ public class PlayerIdleState : PlayerState
     public override void OnLogic()
     {
         base.OnLogic();
+        PlayerBrain.playerMovement.Move();
         PlayerBrain.playerMovement.LocomotionLower();
     }
        

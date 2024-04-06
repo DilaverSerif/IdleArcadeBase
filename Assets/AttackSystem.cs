@@ -1,25 +1,39 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 public abstract class AttackSystem: MonoBehaviour
 {
-    public List<GameObject> targets = new List<GameObject>();
-
-    public TargetFinder enterTargetFinder;
-    public TargetFinder exitTargetFinder;
+    public TargetFinder<Transform> targetFinder;
 
     public bool IsTargeting
     {
         get
         {
-            return targets.Count > 0;
+            return targetFinder.targets.Count > 0;
         }
     }
-    protected virtual void Awake()
-    {
-        
-    }
+
+    public abstract void Attack();
+
     public Vector3 GetClosestTarget()
     {
-        return targets[0].transform.position;
+        return targetFinder.targets.Count == 0 ? Vector3.zero : targetFinder.targets[0].position;
+    }
+    
+    public Transform GetClosestTargetTransform()
+    {
+        return targetFinder.targets.Count == 0 ? null : targetFinder.targets[0];
+    }
+    
+    void Update()
+    {
+        targetFinder?.OnLogic(transform);
+    }
+    
+    void OnDrawGizmosSelected()
+    {
+        targetFinder?.OnDrawGizmos(transform);
     }
 }

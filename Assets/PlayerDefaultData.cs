@@ -13,4 +13,7 @@ public class PlayerDefaultData: ScriptableObject, IPlayerData
     public AnimationCurve rotationTurnSpeedCurve { get; set; }
     [field: SerializeField,BoxGroup("Rotation")]
     public PlayerInGameData.RotationType rotationType { get; set; }
+    
+    [field: SerializeField,BoxGroup("Health")]
+    public int maxHealth { get; set; }
 }
