@@ -1,16 +1,17 @@
-public class PlayerHealth : HealthSystem
+using ComboSystem.Player;
+public class PlayerHealth : HealthSystem<PlayerBrain>
 {
     public override void Die()
     {
-        throw new System.NotImplementedException();
+        brain.playerStateMachine.ChangeState(Enum_PlayerState.Die);
     }
     public override void Revive()
     {
-        throw new System.NotImplementedException();
+        
     }
     public override void Hit()
     {
-        throw new System.NotImplementedException();
+        brain.playerStateMachine.ChangeState(Enum_PlayerState.Hurt);
     }
     public override WarSide GetWarSide()
     {

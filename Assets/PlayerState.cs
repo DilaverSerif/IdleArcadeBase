@@ -3,16 +3,6 @@ using ComboSystem.Player.ComboSystem.Player;
 using UnityHFSM;
 namespace ComboSystem.Player
 {
-    public enum Enum_PlayerState
-    {
-        None = 0,
-        Idle,
-        Walk,
-        WalkTargeting,
-        IdleTargeting,
-        Run,
-    }
-    
     public abstract class PlayerState : State<Enum_PlayerState, PlayerStateEventData>
     {
         protected readonly PlayerBrain PlayerBrain;

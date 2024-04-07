@@ -4,11 +4,11 @@ using System;
 [Serializable]
 public class EnemyStateMachine: BaseStateMachine<Enum_EnemyState,EnemyStateEventData,EnemyBrain>
 {
-    EnemyIdleState idleState;
-    EnemyWalkState walkState;
-    EnemyAttackState attackState;
-    EnemyDeadState deadState;
-    EnemyHurtState hurtState;
+    private EnemyIdleState idleState;
+    private EnemyWalkState walkState;
+    private EnemyAttackState attackState;
+    private EnemyDeadState deadState;
+    private EnemyHurtState hurtState;
     public EnemyStateMachine(EnemyBrain brain) : base(brain)
     {
     }
@@ -32,4 +32,5 @@ public class EnemyStateMachine: BaseStateMachine<Enum_EnemyState,EnemyStateEvent
     {
         return Enum_EnemyState.Idle;
     }
+  
 }

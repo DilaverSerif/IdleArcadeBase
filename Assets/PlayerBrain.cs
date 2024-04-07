@@ -18,14 +18,14 @@ public class PlayerBrain : MonoBehaviour
     public PlayerStateMachine playerStateMachine;
     
     public StatUser statUser;
-    public HealthSystem healthSystem;
+    public HealthSystem<PlayerBrain> healthSystem;
     public AttackSystem attackSystem;
     
     void Awake()
     {
         attackSystem = GetComponent<PlayerAttackSystem>();
-        healthSystem = GetComponent<HealthSystem>();
-        healthSystem.InitializeHealthSystem(defaultData.maxHealth);
+        healthSystem = GetComponent<HealthSystem<PlayerBrain>>();
+        healthSystem.InitializeHealthSystem(this,defaultData.maxHealth);
         
         playerAnimation = new PlayerAnimationSystem(this, GetComponentInChildren<Animator>());
         playerMovement = new PlayerMovementSystem(this, GetComponent<CharacterController>());

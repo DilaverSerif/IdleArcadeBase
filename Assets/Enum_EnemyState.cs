@@ -4,6 +4,7 @@ public enum Enum_EnemyState
     Idle,
     Walk,
     Attack,
+    Hurt,
     Dead,
 
 }

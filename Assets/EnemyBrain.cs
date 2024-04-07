@@ -16,7 +16,7 @@ public class EnemyBrain : MonoBehaviour
     {
         attackSystem = GetComponent<PlayerAttackSystem>();
         healthSystem = GetComponent<EnemyHealth>();
-        healthSystem.InitializeHealthSystem(defaultData.maxHealth);
+        healthSystem.InitializeHealthSystem(this,defaultData.maxHealth);
         
         enemyStateMachine = new EnemyStateMachine(this);
         enemyMovement = new EnemyNavMeshMoveSystem(this, GetComponent<NavMeshAgent>());

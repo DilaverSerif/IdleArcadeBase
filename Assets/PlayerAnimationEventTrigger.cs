@@ -6,7 +6,7 @@ public class PlayerAnimationEventTrigger : MonoBehaviour
 {
     public PlayerBrain playerBrain;
     
-    public void Throw()
+    public void AttackEvent()
     {
         playerBrain.attackSystem.Attack();
     }

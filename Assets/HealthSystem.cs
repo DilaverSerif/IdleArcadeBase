@@ -1,11 +1,13 @@
 using UnityEngine;
-public abstract class HealthSystem : MonoBehaviour
+public abstract class HealthSystem<TBrain> : MonoBehaviour where TBrain: class
 {
+    protected TBrain brain;
     public int maxHealth;
     public int currentHealth;
 
-    public void InitializeHealthSystem(int maxHealth)
+    public void InitializeHealthSystem(TBrain brain,int maxHealth)
     {
+        this.brain = brain;
         this.maxHealth = maxHealth;
         currentHealth = maxHealth;
     }

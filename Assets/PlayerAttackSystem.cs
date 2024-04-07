@@ -1,14 +1,7 @@
-using System;
 using Sirenix.OdinInspector;
 
 public class PlayerAttackSystem : AttackSystem
 {
-    public Weapon CurrentWeapon;
-    public Action<Weapon> OnChangedWeapon;
-    void OnDrawGizmosSelected()
-    {
-        targetFinder.OnDrawGizmos(transform);
-    }
     public override void Attack()
     {
         var target = GetClosestTargetTransform();
@@ -20,6 +13,11 @@ public class PlayerAttackSystem : AttackSystem
         
         CurrentWeapon.Shoot(hitData);
     }
+    void OnDrawGizmosSelected()
+    {
+        targetFinder.OnDrawGizmos(transform);
+    }
+
 
     #if UNITY_EDITOR
     [Button]

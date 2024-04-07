@@ -37,6 +37,12 @@ public abstract class BaseStateMachine<TEnum, TEventData, TBrain> where TEnum : 
         stateMachine.SetStartState(GetStartingState());
         stateMachine.Init();
     }
+    
+    public virtual void ChangeState(TEnum state,bool force = true)
+    {
+        stateMachine.RequestStateChange(state,force);
+    }
+    
     protected abstract void OnCreateStates();
     protected abstract void OnSetTransitions();
     protected abstract void OnSetStates();

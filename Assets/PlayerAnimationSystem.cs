@@ -1,4 +1,5 @@
 using System;
+using ComboSystem.Player;
 using UnityEngine;
 
 [Serializable]
@@ -10,6 +11,7 @@ public class PlayerAnimationSystem: PlayerSystem
     private static readonly int Target = Animator.StringToHash("Target");
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int SideDir = Animator.StringToHash("Dir");
+    static readonly int Attack = Animator.StringToHash("Attack");
     public PlayerAnimationSystem(PlayerBrain playerBrain,Animator defaultAnimator) : base(playerBrain)
     {
         this.defaultAnimator = defaultAnimator;
@@ -40,6 +42,16 @@ public class PlayerAnimationSystem: PlayerSystem
         else
         {
             defaultAnimator.SetFloat(Speed,currentSpeed);
+        }
+    }
+    public void SetAnimation(Enum_PlayerState state)
+    {
+        switch (state)
+        {
+            case Enum_PlayerState.IdleAttacking:
+                defaultAnimator.SetTrigger(Attack);
+                defaultAnimator.SetTrigger(Attack);
+                break;
         }
     }
 }
