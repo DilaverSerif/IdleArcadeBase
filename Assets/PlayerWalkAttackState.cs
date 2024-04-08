@@ -10,13 +10,14 @@ public class PlayerWalkAttackState: PlayerState
     
     public override void OnLogic()
     {
-        PlayerBrain.playerMovement.Rotate();
+        base.OnLogic();
+        PlayerBrain.playerMovement.Rotate(PlayerBrain.attackSystem.GetClosestTarget());
         PlayerBrain.playerMovement.Move();
         PlayerBrain.playerMovement.LocomotionRaise();
-    }
-
-    public override void OnEnter()
-    {
-        PlayerBrain.playerAnimation.SetAnimation(Enum_PlayerState.WalkAttacking);
+        
+        if (PlayerBrain.attackSystem.CanAttack)
+        {
+            PlayerBrain.playerAnimation.SetAnimation(Enum_PlayerState.IdleAttacking);
+        }
     }
 }

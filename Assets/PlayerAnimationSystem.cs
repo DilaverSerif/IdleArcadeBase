@@ -3,7 +3,7 @@ using ComboSystem.Player;
 using UnityEngine;
 
 [Serializable]
-public class PlayerAnimationSystem: PlayerSystem
+public class PlayerAnimationSystem : PlayerSystem
 {
     public Animator defaultAnimator;
     public Vector3 direction;
@@ -12,7 +12,7 @@ public class PlayerAnimationSystem: PlayerSystem
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int SideDir = Animator.StringToHash("Dir");
     static readonly int Attack = Animator.StringToHash("Attack");
-    public PlayerAnimationSystem(PlayerBrain playerBrain,Animator defaultAnimator) : base(playerBrain)
+    public PlayerAnimationSystem(PlayerBrain playerBrain, Animator defaultAnimator) : base(playerBrain)
     {
         this.defaultAnimator = defaultAnimator;
     }
@@ -21,7 +21,7 @@ public class PlayerAnimationSystem: PlayerSystem
     {
         defaultAnimator.SetBool(Target, playerBrain.attackSystem.IsTargeting);
         var currentSpeed = playerBrain.playerMovement.GetCurrentSpeed();
-        
+
         if (defaultAnimator.GetBool(Target))
         {
             var transformForward = transform.forward;
@@ -41,7 +41,7 @@ public class PlayerAnimationSystem: PlayerSystem
         }
         else
         {
-            defaultAnimator.SetFloat(Speed,currentSpeed);
+            defaultAnimator.SetFloat(Speed, currentSpeed);
         }
     }
     public void SetAnimation(Enum_PlayerState state)
@@ -49,7 +49,8 @@ public class PlayerAnimationSystem: PlayerSystem
         switch (state)
         {
             case Enum_PlayerState.IdleAttacking:
-                defaultAnimator.SetTrigger(Attack);
+            case Enum_PlayerState.WalkAttacking:
+                defaultAnimator. SetTrigger(Attack);
                 defaultAnimator.SetTrigger(Attack);
                 break;
         }

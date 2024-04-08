@@ -4,6 +4,7 @@ public class PlayerAttackSystem : AttackSystem
 {
     public override void Attack()
     {
+        base.Attack();
         var target = GetClosestTargetTransform();
         var hitData = new HitData
         {
@@ -11,7 +12,7 @@ public class PlayerAttackSystem : AttackSystem
             damage = 10
         };
         
-        CurrentWeapon.Shoot(hitData);
+        currentWeapon.Shoot(hitData);
     }
     void OnDrawGizmosSelected()
     {

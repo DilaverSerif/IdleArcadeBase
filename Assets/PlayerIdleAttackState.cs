@@ -13,10 +13,10 @@ public class PlayerIdleAttackState: PlayerState
         base.OnLogic();
         PlayerBrain.playerMovement.Move();
         PlayerBrain.playerMovement.LocomotionLower();
-    }
 
-    public override void OnEnter()
-    {
-        PlayerBrain.playerAnimation.SetAnimation(Enum_PlayerState.IdleAttacking);
+        if (PlayerBrain.attackSystem.CanAttack)
+        {
+            PlayerBrain.playerAnimation.SetAnimation(Enum_PlayerState.IdleAttacking);
+        }
     }
 }

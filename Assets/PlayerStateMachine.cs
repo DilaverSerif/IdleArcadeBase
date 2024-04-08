@@ -10,21 +10,21 @@ public class PlayerStateMachine : BaseStateMachine<Enum_PlayerState, PlayerState
     PlayerWalkState walkState;
     PlayerWalkingTargetState walkingTargetState;
     PlayerIdleTargetState idleTargetState;
-    
+
     PlayerIdleAttackState idleAttackState;
     PlayerWalkAttackState walkAttackState;
-    
+
     public PlayerStateMachine(PlayerBrain brain) : base(brain)
     {
     }
-    
+
     protected override void OnCreateStates()
     {
         idleState = new PlayerIdleState(brain);
         walkState = new PlayerWalkState(brain);
         walkingTargetState = new PlayerWalkingTargetState(brain);
         idleTargetState = new PlayerIdleTargetState(brain);
-        
+
         idleAttackState = new PlayerIdleAttackState(brain);
         walkAttackState = new PlayerWalkAttackState(brain);
     }
@@ -43,9 +43,42 @@ public class PlayerStateMachine : BaseStateMachine<Enum_PlayerState, PlayerState
         stateMachine.AddTransition(Enum_PlayerState.WalkTargeting, Enum_PlayerState.IdleTargeting, _ => TargetingToTargetingIdle());
 
         stateMachine.AddTransition(Enum_PlayerState.IdleTargeting, Enum_PlayerState.Walk, _ => IdleToWalkingTargetingToWalk());
-        
+
         stateMachine.AddTransition(Enum_PlayerState.WalkTargeting, Enum_PlayerState.WalkAttacking, _ => WalkTargetingToWalkAttacking());
         stateMachine.AddTransition(Enum_PlayerState.IdleTargeting, Enum_PlayerState.IdleAttacking, _ => IdleTargetingToIdleAttacking());
+
+        stateMachine.AddTransition(Enum_PlayerState.WalkAttacking, Enum_PlayerState.Walk, _ => WalkAttackingToWalk());
+        stateMachine.AddTransition(Enum_PlayerState.IdleAttacking, Enum_PlayerState.Idle, _ => IdleAttackingToIdle());
+        
+        stateMachine.AddTransition(Enum_PlayerState.WalkAttacking, Enum_PlayerState.WalkTargeting, _ => WalkAttackingToWalkTargeting());
+        stateMachine.AddTransition(Enum_PlayerState.IdleAttacking, Enum_PlayerState.IdleTargeting, _ => IdleAttackingToIdleTargeting());
+
+        stateMachine.AddTransition(Enum_PlayerState.WalkAttacking, Enum_PlayerState.IdleAttacking, _ => WalkAttackingToIdleAttacking());
+        stateMachine.AddTransition(Enum_PlayerState.IdleAttacking, Enum_PlayerState.WalkAttacking, _ => IdleAttackingToWalkAttacking());
+    }
+    bool IdleAttackingToIdleTargeting()
+    {
+        return !Joystick.Instance.Touching && brain.attackSystem.IsTargeting;
+    }
+    bool WalkAttackingToWalkTargeting()
+    {
+        return Joystick.Instance.Touching && brain.attackSystem.IsTargeting;
+    }
+    bool IdleAttackingToWalkAttacking()
+    {
+        return Joystick.Instance.Touching && brain.attackSystem.IsTargeting && brain.attackSystem.CanAttack;
+    }
+    bool WalkAttackingToIdleAttacking()
+    {
+        return !Joystick.Instance.Touching && brain.attackSystem.IsTargeting && brain.attackSystem.CanAttack;
+    }
+    bool IdleAttackingToIdle()
+    {
+        return !Joystick.Instance.Touching && !brain.attackSystem.IsTargeting;
+    }
+    bool WalkAttackingToWalk()
+    {
+        return Joystick.Instance.Touching && !brain.attackSystem.IsTargeting;
     }
 
     protected override void OnSetStates()
@@ -54,7 +87,7 @@ public class PlayerStateMachine : BaseStateMachine<Enum_PlayerState, PlayerState
         stateMachine.AddState(Enum_PlayerState.Walk, walkState);
         stateMachine.AddState(Enum_PlayerState.WalkTargeting, walkingTargetState);
         stateMachine.AddState(Enum_PlayerState.IdleTargeting, idleTargetState);
-        
+
         stateMachine.AddState(Enum_PlayerState.IdleAttacking, idleAttackState);
         stateMachine.AddState(Enum_PlayerState.WalkAttacking, walkAttackState);
     }
@@ -62,7 +95,7 @@ public class PlayerStateMachine : BaseStateMachine<Enum_PlayerState, PlayerState
     {
         return Enum_PlayerState.Idle;
     }
-    
+
     bool IdleTargetingToIdleAttacking()
     {
         return brain.attackSystem.IsTargeting && Joystick.Instance.Touching && brain.attackSystem.CanAttack;
@@ -71,7 +104,7 @@ public class PlayerStateMachine : BaseStateMachine<Enum_PlayerState, PlayerState
     {
         return Joystick.Instance.Touching && brain.attackSystem.IsTargeting && brain.attackSystem.CanAttack;
     }
-    
+
     bool IdleToWalkingTargetingToWalk()
     {
         return !brain.attackSystem.IsTargeting && Joystick.Instance.Touching;
