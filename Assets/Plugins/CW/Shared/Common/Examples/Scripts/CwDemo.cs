@@ -32,21 +32,21 @@ namespace CW.Common
 		/// <summary>If you enable this setting and your project is running with HDRP then any cameras missing the <b>HDAdditionalCameraData</b> component will have it added.</summary>
 		public bool UpgradeCamerasInHDRP { set { upgradeCamerasInHDRP = value; } get { return upgradeCamerasInHDRP; } } [SerializeField] private bool upgradeCamerasInHDRP = true;
 
+
+
 		protected virtual void OnEnable()
 		{
-			var pipeline = CwShaderBundle.DetectProjectPipeline();
-
 			if (upgradeInputModule == true)
 			{
 				TryUpgradeEventSystem();
 			}
 
-			if (CwShaderBundle.IsURP(pipeline) == true)
+			if (CwHelper.IsURP == true)
 			{
 				TryApplyURP();
 			}
 
-			if (CwShaderBundle.IsHDRP(pipeline) == true)
+			if (CwHelper.IsHDRP == true)
 			{
 				TryApplyHDRP();
 			}

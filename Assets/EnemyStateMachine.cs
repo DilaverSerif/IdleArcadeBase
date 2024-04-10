@@ -22,11 +22,15 @@ public class EnemyStateMachine: BaseStateMachine<Enum_EnemyState,EnemyStateEvent
     }
     protected override void OnSetTransitions()
     {
-        
+       
     }
     protected override void OnSetStates()
     {
-        
+        stateMachine.AddState(Enum_EnemyState.Hurt,hurtState);
+        stateMachine.AddState(Enum_EnemyState.Idle,idleState);
+        stateMachine.AddState(Enum_EnemyState.Walk,walkState);
+        stateMachine.AddState(Enum_EnemyState.Attack,attackState);
+        stateMachine.AddState(Enum_EnemyState.Dead,deadState);
     }
     public override Enum_EnemyState GetStartingState()
     {

@@ -12,9 +12,15 @@ public class PlayerAnimationSystem : PlayerSystem
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int SideDir = Animator.StringToHash("Dir");
     static readonly int Attack = Animator.StringToHash("Attack");
+    static readonly int StopAttack = Animator.StringToHash("StopAttack");
     public PlayerAnimationSystem(PlayerBrain playerBrain, Animator defaultAnimator) : base(playerBrain)
     {
         this.defaultAnimator = defaultAnimator;
+    }
+    
+    public bool IsAttacking()
+    {
+        return defaultAnimator.GetBool(Attack);
     }
 
     public override void OnUpdate()
@@ -54,5 +60,10 @@ public class PlayerAnimationSystem : PlayerSystem
                 defaultAnimator.SetTrigger(Attack);
                 break;
         }
+    }
+    public void CancelAttack()
+    {
+        defaultAnimator.ResetTrigger(Attack);
+        defaultAnimator.SetTrigger(StopAttack);
     }
 }

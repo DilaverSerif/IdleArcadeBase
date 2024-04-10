@@ -1,5 +1,5 @@
 using UnityEngine;
-public class TestWeapon : Weapon
+public class TestWeapon : RangedWeapon
 {
     public override void Shoot(HitData hitData)
     {

@@ -26,7 +26,7 @@ public class FloatingText : MonoBehaviour
     
     void Update()
     {
-        transform.LookAt(transform.position - Camera.main.transform.position, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
     }
 
     async UniTaskVoid Animate()

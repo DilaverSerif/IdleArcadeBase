@@ -73,6 +73,22 @@ public static class AttackSystemExtensions
         
         return objectsWithTag;
     }
+    
+    public static List<T> GetObjectsWithLayerInCircularCast<T>(Vector3 center,LayerMask layerMask,float radius = 5f, int maxColliders = 3) where T : Component
+    {
+        var objectsWithTag = new List<T>();
+        var colliders = new Collider[maxColliders];
+        int count = Physics.OverlapSphereNonAlloc(center, radius, colliders,layerMask);
+        
+        for (int i = 0; i < count; i++)
+        {
+            if (colliders[i].TryGetComponent(out T component))
+                objectsWithTag.Add(component);
+        }
+        
+
+        return objectsWithTag;
+    }
 }
 
 public enum TargetFinderFindType

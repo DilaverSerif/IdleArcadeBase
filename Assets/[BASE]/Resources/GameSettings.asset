@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58baf8dba677494dbdc4c37c7a4c32b4, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  floatingTextLifeTime: 1
-  floatingTextScaleTime: 1
+  floatingTextLifeTime: 0.5
+  floatingTextScaleTime: 0.25

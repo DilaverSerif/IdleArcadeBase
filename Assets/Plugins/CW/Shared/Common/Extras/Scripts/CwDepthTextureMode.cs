@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using CW.Common;
 
 namespace CW.Common
 {
@@ -6,8 +7,7 @@ namespace CW.Common
 	[ExecuteInEditMode]
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Camera))]
-	[HelpURL(CwShared.HelpUrlPrefix + "CwDepthTextureMode")]
-	[AddComponentMenu(CwShared.ComponentMenuPrefix + "Depth Texture Mode")]
+	[AddComponentMenu("CW/Common/CW Depth Texture Mode")]
 	public class CwDepthTextureMode : MonoBehaviour
 	{
 		/// <summary>The depth mode that will be applied to the camera.</summary>

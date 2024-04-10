@@ -10,7 +10,8 @@ public class PlayerWalkState : PlayerState
     }
     public override void OnEnter()
     {
-         
+        if (PlayerBrain.playerAnimation.IsAttacking())
+            PlayerBrain.playerAnimation.CancelAttack();
     }
 
     public override void OnLogic()

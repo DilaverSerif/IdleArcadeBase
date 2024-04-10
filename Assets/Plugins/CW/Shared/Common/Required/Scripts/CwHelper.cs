@@ -55,6 +55,62 @@ namespace CW.Common
 				};
 		}
 
+		public static bool IsSRP
+		{
+			get
+			{
+				return UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null;
+			}
+		}
+
+		public static bool IsBIRP
+		{
+			get
+			{
+				return UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline == null;
+			}
+		}
+
+		public static bool IsURP
+		{
+			get
+			{
+				var crp = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline;
+
+				if (crp != null)
+				{
+					var title = crp.GetType().ToString();
+
+					if (title.Contains("Universal") == true)
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
+		}
+
+		public static bool IsHDRP
+		{
+			get
+			{
+				var crp = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline;
+
+				if (crp != null)
+				{
+					var title = crp.GetType().ToString();
+
+					if (title.Contains("HighDefinition") == true)
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
+		}
+
 		public static T FindAnyObjectByType<T>(bool includeInactive = false)
 			where T : Object
 		{

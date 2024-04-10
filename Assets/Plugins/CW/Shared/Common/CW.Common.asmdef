@@ -1,10 +1,10 @@
 {
     "name": "CW.Common",
+    "rootNamespace": "",
     "references": [
         "Unity.InputSystem",
         "Unity.RenderPipelines.Core.Runtime",
-        "Unity.RenderPipelines.HighDefinition.Runtime",
-        "JBooth.BetterShaders.Editor"
+        "Unity.RenderPipelines.HighDefinition.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -14,11 +14,6 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [
-        {
-            "name": "com.jbooth.better-shaders",
-            "expression": "",
-            "define": "__BETTERSHADERS__"
-        },
         {
             "name": "com.unity.render-pipelines.high-definition",
             "expression": "",
