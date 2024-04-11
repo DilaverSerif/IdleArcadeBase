@@ -7,9 +7,19 @@ public abstract class MeleeWeapon : Weapon
     public float weaponAttackRange = 1;
     public float weaponAttackAngle = 90;
     
-    public virtual bool CheckContact(Vector3 position)
+    public virtual bool CheckRequirement(Vector3 position)
     {
         return CheckAngle(position) && CheckDistance(position);
+    }
+
+    public override bool CanShoot(float loadTime)
+    {
+        return base.CanShoot(loadTime) && CheckRequirement(firePoint.position);
+    }
+
+    public virtual bool CheckContact(Vector3 position)
+    {
+        return transform.CheckCollision<PlayerHealth>(weaponAttackAngle,weaponAttackRange,7);
     }
     
     protected virtual bool CheckDistance(Vector3 position)

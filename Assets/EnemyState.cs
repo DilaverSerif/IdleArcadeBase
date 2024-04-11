@@ -4,7 +4,7 @@ using ComboSystem.Player.ComboSystem.Player;
 using UnityHFSM;
 public class EnemyState : State<Enum_EnemyState, EnemyStateEventData>
 {
-    protected readonly EnemyBrain PlayerBrain;
+    protected readonly EnemyBrain TheBrain;
     protected readonly float ExitTime;
     protected bool RequestedExit;
     
@@ -14,7 +14,7 @@ public class EnemyState : State<Enum_EnemyState, EnemyStateEventData>
     protected Action<State<Enum_EnemyState, EnemyStateEventData>> onExit;
             
     public EnemyState(
-        EnemyBrain playerBrain,
+        EnemyBrain theBrain,
         bool needsExitTime = false,
         float exitTime = 0,
         Action<State<Enum_EnemyState, EnemyStateEventData>> onEnter = null,
@@ -23,7 +23,7 @@ public class EnemyState : State<Enum_EnemyState, EnemyStateEventData>
         Func<State<Enum_EnemyState, EnemyStateEventData>, bool> canExit = null
     )
     {
-        this.PlayerBrain = playerBrain;
+        this.TheBrain = theBrain;
         this.onEnter = onEnter;
         this.onLogic = onLogic;
         this.onExit = onExit;

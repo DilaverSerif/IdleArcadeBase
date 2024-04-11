@@ -28,7 +28,7 @@ public abstract class AttackSystem : MonoBehaviour
             return targetFinder.targets.Count > 0;
         }
     }
-    public bool CanAttack
+    public virtual bool CanAttack
     {
         get
         {

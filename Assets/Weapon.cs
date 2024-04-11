@@ -6,4 +6,6 @@ public abstract class Weapon : MonoBehaviour
     public Transform firePoint;
 
     public abstract void Shoot(HitData hitData);
+    public virtual bool CanShoot(float loadTime) => loadTime >= attackCooldown;
+
 }

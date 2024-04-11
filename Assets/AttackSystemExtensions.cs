@@ -12,8 +12,36 @@ public static class AttackSystemExtensions
 
             var direction = Quaternion.Euler(0, currentAngle, 0) * origin.forward;
 
-            RaycastHit hit;
-            if (Physics.Raycast(origin.position, direction, out hit, length, layerMask))
+            if (Physics.Raycast(origin.position, direction, out var hit, length, layerMask))
+            {
+                #if UNITY_EDITOR
+                Debug.DrawRay(origin.position, direction * length, Color.yellow, 1);
+                #endif
+                if (hit.transform.TryGetComponent(out T component))
+                    return component;
+                else Debug.LogError($"Component {typeof(T)} not found on {origin.name}");
+            }
+            #if UNITY_EDITOR
+            else
+            {
+                Debug.DrawRay(origin.position, direction * length, Color.red, 1);
+            }
+            #endif
+        }
+
+        return null;
+    }
+    
+    public static T CheckCollision<T>(this Transform origin, float angle, float length, int rayCount) where T : MonoBehaviour
+    {
+        for (int i = 0; i < rayCount; i++)
+        {
+            float lerpFactor = i / (float)(rayCount - 1);
+            float currentAngle = Mathf.Lerp(angle, -angle, lerpFactor);
+
+            var direction = Quaternion.Euler(0, currentAngle, 0) * origin.forward;
+
+            if (Physics.Raycast(origin.position, direction, out var hit, length))
             {
                 #if UNITY_EDITOR
                 Debug.DrawRay(origin.position, direction * length, Color.yellow, 1);

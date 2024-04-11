@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,6 +24,11 @@ public class EnemyBrain : MonoBehaviour
     void FixedUpdate()
     {
         enemyStateMachine.StateMachine.OnLogic();
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        enemyStateMachine.routeSystem.OnGizmos();
     }
 
 

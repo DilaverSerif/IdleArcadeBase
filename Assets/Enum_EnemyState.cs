@@ -6,5 +6,6 @@ public enum Enum_EnemyState
     Attack,
     Hurt,
     Dead,
+    Route
 
 }
