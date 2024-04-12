@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+
 public abstract class AttackSystem : MonoBehaviour
 {
     [FormerlySerializedAs("CurrentWeapon")]

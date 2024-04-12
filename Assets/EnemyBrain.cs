@@ -9,11 +9,11 @@ public class EnemyBrain : MonoBehaviour
     public EnemyStateMachine enemyStateMachine;
     public EnemyNavMeshMoveSystem enemyMovement;
     public EnemyHealth healthSystem;
-    public AttackSystem attackSystem;
+    public EnemyAttackSystem attackSystem;
 
     void Awake()
     {
-        attackSystem = GetComponent<PlayerAttackSystem>();
+        attackSystem = GetComponent<EnemyAttackSystem>();
         healthSystem = GetComponent<EnemyHealth>();
         healthSystem.InitializeHealthSystem(this,defaultData.maxHealth);
         
@@ -30,6 +30,4 @@ public class EnemyBrain : MonoBehaviour
     {
         enemyStateMachine.routeSystem.OnGizmos();
     }
-
-
 }

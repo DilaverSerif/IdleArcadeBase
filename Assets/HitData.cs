@@ -1,12 +1,15 @@
 using UnityEngine;
 public struct HitData
 {
+    public Transform SourceTransform;
     public Transform targetTransform;
     public int damage;
     
-    public HitData(int damage, Transform targetTransform)
+
+    public HitData(Transform sourceTransform, Transform targetTransform, int damage)
     {
-        this.damage = damage;
+        this.SourceTransform = sourceTransform;
         this.targetTransform = targetTransform;
+        this.damage = damage;
     }
 }

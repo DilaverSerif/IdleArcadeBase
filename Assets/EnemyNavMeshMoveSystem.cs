@@ -13,6 +13,7 @@ public class EnemyNavMeshMoveSystem : EnemyMovementSystem<EnemyBrain, NavMeshAge
 
     public override void Stop()
     {
+        component.SetDestination(brain.transform.position);
         component.ResetPath();
     }
 }

@@ -1,6 +1,7 @@
 public class EnemyHealth : HealthSystem<EnemyBrain>
 {
     public DropItem dropItem;
+
     public override void Die()
     {
         brain.enemyStateMachine.ChangeState(Enum_EnemyState.Dead);

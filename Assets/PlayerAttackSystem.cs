@@ -8,6 +8,7 @@ public class PlayerAttackSystem : AttackSystem
         var target = GetClosestTargetTransform();
         var hitData = new HitData
         {
+            SourceTransform = transform,
             targetTransform = target,
             damage = 10
         };

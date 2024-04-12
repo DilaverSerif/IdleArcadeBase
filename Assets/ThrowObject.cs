@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class ThrowObject : MonoBehaviour
 {
     private Rigidbody rb;
+    private Transform launchParenTransform;
     
     void Awake()
     {
@@ -13,6 +14,8 @@ public class ThrowObject : MonoBehaviour
     
     public void Launch(LaunchData launchData)
     {
+        launchParenTransform = launchData.LaunchTransform;
+        
         var targetObjectTf = launchData.targetPosition;
         var direction = targetObjectTf - transform.position;
         direction.y += Random.Range(-1f,1f);
@@ -27,6 +30,8 @@ public class ThrowObject : MonoBehaviour
             var healthSystem = other.gameObject.GetComponent<EnemyHealth>();
             healthSystem.TakeDamage(new HitData
             {
+                SourceTransform = launchParenTransform,
+                targetTransform = other.transform,
                 damage = 10
             });
         }
