@@ -29,13 +29,27 @@ public class EnemyStateMachine: BaseStateMachine<Enum_EnemyState,EnemyStateEvent
         hurtState = new EnemyHurtState(brain,needsExitTime:true,exitTime:.5f);
         
         routeState = new EnemyRouteState(brain);
-        enemyAngryAttack = new EnemyAngryAttackState(brain);
+        enemyAngryAttack = new EnemyAngryAttackState(brain,needsExitTime:true);
 
     }
     protected override void OnSetTransitions()
     {
         stateMachine.AddTransition(Enum_EnemyState.Hurt,Enum_EnemyState.AngryAttack);
+
+        stateMachine.AddTwoWayTransition(Enum_EnemyState.AngryAttack,Enum_EnemyState.Idle,AngryAttackToIdle);
+        stateMachine.AddTwoWayTransition(Enum_EnemyState.AngryAttack,Enum_EnemyState.RushTarget,AngryAttackToRushTarget);
     }
+
+    private bool AngryAttackToRushTarget(Transition<Enum_EnemyState> arg)
+    {
+        return brain.attackSystem.IsTargeting;
+    }
+
+    private bool AngryAttackToIdle(Transition<Enum_EnemyState> arg)
+    {
+        return !brain.attackSystem.IsTargeting;
+    }
+
     protected override void OnSetStates()
     {
         stateMachine.AddState(Enum_EnemyState.Hurt,hurtState);

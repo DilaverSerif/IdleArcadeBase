@@ -5,7 +5,8 @@ using Random = UnityEngine.Random;
 public class ThrowObject : MonoBehaviour
 {
     private Rigidbody rb;
-    private Transform launchParenTransform;
+    private Transform launchParenTransform; //Burayı mantıklı bir hale getirebilir
+        //TODO: Struct yapıları güncelle mantıklı bişiler deneyelim
     
     void Awake()
     {

@@ -7,6 +7,7 @@ public enum Enum_EnemyState
     Hurt,
     Dead,
     Route,
-    AngryAttack
+    AngryAttack,
+    RushTarget
 
 }
