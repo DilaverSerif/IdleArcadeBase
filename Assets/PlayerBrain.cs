@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerBrain : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerBrain : MonoBehaviour
     [BoxGroup("Player Systems")]
     public PlayerMovementSystem playerMovement;
     [BoxGroup("Player Systems")]
-    public PlayerSoundSystem playerSound;
+    public PlayerSoundSystem PlayerSound;
     [BoxGroup("Player Systems")]
     public PlayerStateMachine playerStateMachine;
     
@@ -29,7 +30,7 @@ public class PlayerBrain : MonoBehaviour
         
         playerAnimation = new PlayerAnimationSystem(this, GetComponentInChildren<Animator>());
         playerMovement = new PlayerMovementSystem(this, GetComponent<CharacterController>());
-        playerSound = new PlayerSoundSystem(this);
+        PlayerSound = new PlayerSoundSystem(this);
         inGameData = new PlayerInGameData(this);
         playerStateMachine = new PlayerStateMachine(this);
     }

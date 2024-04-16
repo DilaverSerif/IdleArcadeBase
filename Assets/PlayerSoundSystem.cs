@@ -1,6 +1,6 @@
-public class PlayerSoundSystem: PlayerSystem
+public class PlayerSoundSystem: CharacterSystem<PlayerBrain>
 {
-    public PlayerSoundSystem(PlayerBrain playerBrain) : base(playerBrain)
+    public PlayerSoundSystem(PlayerBrain brain) : base(brain)
     {
     }
 }

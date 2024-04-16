@@ -3,7 +3,7 @@ using ComboSystem.Player;
 using UnityEngine;
 
 [Serializable]
-public class PlayerAnimationSystem : PlayerSystem
+public class PlayerAnimationSystem : CharacterSystem<PlayerBrain>
 {
     public Animator defaultAnimator;
     public Vector3 direction;
@@ -13,7 +13,7 @@ public class PlayerAnimationSystem : PlayerSystem
     private static readonly int SideDir = Animator.StringToHash("Dir");
     static readonly int Attack = Animator.StringToHash("Attack");
     static readonly int StopAttack = Animator.StringToHash("StopAttack");
-    public PlayerAnimationSystem(PlayerBrain playerBrain, Animator defaultAnimator) : base(playerBrain)
+    public PlayerAnimationSystem(PlayerBrain brain, Animator defaultAnimator) : base(brain)
     {
         this.defaultAnimator = defaultAnimator;
     }
@@ -25,8 +25,8 @@ public class PlayerAnimationSystem : PlayerSystem
 
     public override void OnUpdate()
     {
-        defaultAnimator.SetBool(Target, playerBrain.attackSystem.IsTargeting);
-        var currentSpeed = playerBrain.playerMovement.GetCurrentSpeed();
+        defaultAnimator.SetBool(Target, brain.attackSystem.IsTargeting);
+        var currentSpeed = brain.playerMovement.GetCurrentSpeed();
 
         if (defaultAnimator.GetBool(Target))
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,6 +191,10 @@ MonoBehaviour:
       - {x: 10.16, y: 0, z: 17.52}
   healthSystem: {fileID: 0}
   attackSystem: {fileID: 0}
+  enemyAnimationSystem:
+    debug: 0
+    brain: {fileID: 0}
+    defaultAnimator: {fileID: 0}
 --- !u!114 &154650415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,7 +700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34500775, y: 0.000000016149908, z: -0.000000005936336, w: 0.9385998}
+  m_LocalRotation: {x: 0.34500775, y: -0.000000016149903, z: 0.0000000059363345, w: 0.9385998}
   m_LocalPosition: {x: 0, y: 9.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1758,9 +1762,10 @@ GameObject:
   - component: {fileID: 888165832}
   - component: {fileID: 888165833}
   - component: {fileID: 888165834}
+  - component: {fileID: 888165835}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1841,12 +1846,12 @@ MonoBehaviour:
   defaultData: {fileID: 11400000, guid: dc46abea175994abc8372c308fa6758e, type: 2}
   playerAnimation:
     debug: 0
-    playerBrain: {fileID: 0}
+    brain: {fileID: 0}
     defaultAnimator: {fileID: 0}
     direction: {x: 0, y: 0, z: 0}
   playerMovement:
     debug: 1
-    playerBrain: {fileID: 0}
+    brain: {fileID: 0}
   statUser:
     stats: []
     buffs: []
@@ -1973,6 +1978,29 @@ MonoBehaviour:
     layerMask:
       serializedVersion: 2
       m_Bits: 128
+--- !u!136 &888165835
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888165824}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &989915257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,7 +2047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ace5f77ee5c90247b54ba5bf32ed625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0.5
+  attackCooldown: 123
   bulletSpeed: 20
   firePoint: {fileID: 161711311}
   bulletPrefab: {fileID: 5152585091229164365, guid: ac6e8b44a8f98e14b84f1f93d21f2a9a,
@@ -2290,7 +2318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624757093}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34500775, y: 0.000000016149908, z: -0.000000005936336, w: 0.9385998}
+  m_LocalRotation: {x: 0.34500775, y: -0.000000016149903, z: 0.0000000059363345, w: 0.9385998}
   m_LocalPosition: {x: 0, y: 9.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3810,7 +3838,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8076488724594794339}
   - component: {fileID: 8076488724587573429}
-  - component: {fileID: 8076488724594819844}
   - component: {fileID: 8076488724594819846}
   m_Layer: 0
   m_Name: FemaleModel
@@ -3819,29 +3846,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &8076488724594819844
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076488724594819843}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8076488724594819845
 GameObject:
   m_ObjectHideFlags: 0

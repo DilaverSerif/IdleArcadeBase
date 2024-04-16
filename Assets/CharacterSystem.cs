@@ -1,14 +1,14 @@
 using UnityEngine;
-public abstract class PlayerSystem
+public abstract class CharacterSystem<T> where T: Component
 {
     public bool debug = false;
     [HideInInspector]
-    public PlayerBrain playerBrain;
-    protected Transform transform => playerBrain.transform;
+    public T brain;
+    protected Transform transform => brain.transform;
 
-    public PlayerSystem(PlayerBrain playerBrain)
+    public CharacterSystem(T brain)
     {
-        this.playerBrain = playerBrain;
+        this.brain = brain;
     }
     
     public virtual void OnStart()

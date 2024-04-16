@@ -1,42 +1,42 @@
 using System;
 using UnityEngine;
 [Serializable]
-public class PlayerMovementSystem : PlayerSystem
+public class PlayerMovementSystem : CharacterSystem<PlayerBrain>
 {
     private CharacterController _characterController;
     private float CurrentWalkTime
     {
-        get => playerBrain.inGameData.CurrentWalkTime;
-        set => playerBrain.inGameData.CurrentWalkTime = value;
+        get => brain.inGameData.CurrentWalkTime;
+        set => brain.inGameData.CurrentWalkTime = value;
     }
     private float CurrentMaxWalkTime
     {
-        get => playerBrain.inGameData.CurrentMaxWalkTime;
-        set => playerBrain.inGameData.CurrentMaxWalkTime = value;
+        get => brain.inGameData.CurrentMaxWalkTime;
+        set => brain.inGameData.CurrentMaxWalkTime = value;
     }
 
 
-    private float MaxWalkTime => playerBrain.inGameData.moveSpeedCurve.keys[playerBrain.inGameData.moveSpeedCurve.length - 1].time;
-    private float Acceleration => playerBrain.inGameData.acceleration;
-    private float MaxSpeed => playerBrain.inGameData.maxSpeed;
+    private float MaxWalkTime => brain.inGameData.moveSpeedCurve.keys[brain.inGameData.moveSpeedCurve.length - 1].time;
+    private float Acceleration => brain.inGameData.acceleration;
+    private float MaxSpeed => brain.inGameData.maxSpeed;
 
-    private AnimationCurve MoveSpeedCurve => playerBrain.inGameData.moveSpeedCurve;
-    private AnimationCurve RotationTurnSpeedCurve => playerBrain.inGameData.rotationTurnSpeedCurve;
-    private PlayerInGameData.RotationType RotationType => playerBrain.inGameData.rotationType;
+    private AnimationCurve MoveSpeedCurve => brain.inGameData.moveSpeedCurve;
+    private AnimationCurve RotationTurnSpeedCurve => brain.inGameData.rotationTurnSpeedCurve;
+    private PlayerInGameData.RotationType RotationType => brain.inGameData.rotationType;
 
     private Vector3 TargetPosition
     {
-        get => playerBrain.inGameData.targetPosition;
-        set => playerBrain.inGameData.targetPosition = value;
+        get => brain.inGameData.targetPosition;
+        set => brain.inGameData.targetPosition = value;
     }
     private Quaternion TargetRotation
     {
-        get => playerBrain.inGameData.targetRotation;
-        set => playerBrain.inGameData.targetRotation = value;
+        get => brain.inGameData.targetRotation;
+        set => brain.inGameData.targetRotation = value;
     }
 
 
-    public PlayerMovementSystem(PlayerBrain playerBrain, CharacterController characterController) : base(playerBrain)
+    public PlayerMovementSystem(PlayerBrain brain, CharacterController characterController) : base(brain)
     {
         _characterController = characterController;
     }

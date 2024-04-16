@@ -9,7 +9,6 @@ using UnityEngine.Serialization;
 
 public abstract class AttackSystem : MonoBehaviour
 {
-    [FormerlySerializedAs("CurrentWeapon")]
     public Weapon currentWeapon;
     public Action<Weapon> ChangedWeapon;
     [ShowInInspector]
