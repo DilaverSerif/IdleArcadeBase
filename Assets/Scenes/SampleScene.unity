@@ -384,6 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0d1d819a78446739103e9b722f71f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TopRight:
+    items:
+    - Item: 0
+      GoldIcon: {fileID: 0}
+      GoldTextMeshProUGUI: {fileID: 0}
 --- !u!1 &232311087
 GameObject:
   m_ObjectHideFlags: 0
