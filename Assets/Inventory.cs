@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour,ISavable
 {
     [TableList]
     public List<InventoryItem> items = new List<InventoryItem>();
 
-    public void AddItem(ItemTransferData itemTransferData)
+    public virtual void AddItem(ItemTransferData itemTransferData)
     {
         foreach (var inventoryItem in items.Where(inventoryItem => inventoryItem.item == itemTransferData.item))
         {
@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
         Debug.Log("Added New Item " + itemTransferData.item + " to inventory");
     }
     
-    public void RemoveItem(ItemTransferData itemTransferData)
+    public virtual void RemoveItem(ItemTransferData itemTransferData)
     {
         foreach (var inventoryItem in items.Where(inventoryItem => inventoryItem.item == itemTransferData.item))
         {
@@ -36,5 +36,16 @@ public class Inventory : MonoBehaviour
     public bool HasItem(Enum_Item item, int amount)
     {
         return items.Any(inventoryItem => inventoryItem.item == item && inventoryItem.amount >= amount);
+    }
+    
+    //Save---
+    public string SaveKey { get => transform.name + "Inventory"; }
+    public void Save()
+    {
+        ES3.Save(SaveKey,items);
+    }
+    public void Load()
+    {
+        items = ES3.Load(SaveKey, new List<InventoryItem>());
     }
 }
