@@ -17,7 +17,6 @@ public abstract class AttackSystem : MonoBehaviour
     
     private UniTask attackTimer;
     private UniTask downAttackTimer;
-    
     private CancellationTokenSource downAttackCancellationToken;
     private CancellationTokenSource attackCancellationToken;
     

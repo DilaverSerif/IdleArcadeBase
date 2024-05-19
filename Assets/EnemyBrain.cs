@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class EnemyBrain : MonoBehaviour
 {
@@ -10,12 +9,12 @@ public class EnemyBrain : MonoBehaviour
     public EnemyStateMachine enemyStateMachine;
     public EnemyNavMeshMoveSystem enemyMovement;
     public EnemyHealth healthSystem;
-    public EnemyAttackSystem attackSystem;
+    public MeleeEnemyAttackSystem attackSystem;
     public EnemyAnimationSystem enemyAnimationSystem;
 
     void Awake()
     {
-        attackSystem = GetComponent<EnemyAttackSystem>();
+        attackSystem = GetComponent<MeleeEnemyAttackSystem>();
         healthSystem = GetComponent<EnemyHealth>();
         healthSystem.InitializeHealthSystem(this, defaultData.maxHealth);
 

@@ -2,20 +2,20 @@ using System;
 using UnityHFSM;
 public class EnemyRushTargetState: EnemyState
 {
-    private EnemyAttackSystem enemyAttackSystem;
+    private readonly MeleeEnemyAttackSystem meleeEnemyAttackSystem;
 
     public EnemyRushTargetState(EnemyBrain theBrain, bool needsExitTime = false, float exitTime = 0, Action<State<Enum_EnemyState, EnemyStateEventData>> onEnter = null, Action<State<Enum_EnemyState, EnemyStateEventData>> onLogic = null, Action<State<Enum_EnemyState, EnemyStateEventData>> onExit = null, Func<State<Enum_EnemyState, EnemyStateEventData>, bool> canExit = null) : base(theBrain, needsExitTime, exitTime, onEnter, onLogic, onExit, canExit)
     {
-        enemyAttackSystem = theBrain.attackSystem;
+        meleeEnemyAttackSystem = theBrain.attackSystem;
     }
 
     public override void OnLogic()
     {
         base.OnLogic();
 
-        if (enemyAttackSystem.IsTargeting)
+        if (meleeEnemyAttackSystem.IsTargeting)
         {
-            TheBrain.enemyMovement.Move(enemyAttackSystem.GetClosestTarget());
+            TheBrain.enemyMovement.Move(meleeEnemyAttackSystem.GetClosestTarget());
         }
     }
 }

@@ -6,7 +6,8 @@ public abstract class MeleeWeapon : Weapon
 {
     public float weaponAttackRange = 1;
     public float weaponAttackAngle = 90;
-    
+    public int damage;
+
     public virtual bool CheckRequirement(Vector3 position)
     {
         return CheckAngle(position) && CheckDistance(position);

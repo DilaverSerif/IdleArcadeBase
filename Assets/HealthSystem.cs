@@ -24,9 +24,9 @@ public abstract class HealthSystem<TBrain> : MonoBehaviour where TBrain : class
     public int currentHealth;
 
     public LastHitData lastHitData;
+    public Action<int> OnHit; //Current health döndürür
 
-
-    public void InitializeHealthSystem(TBrain brain, int maxHealth)
+    public virtual void InitializeHealthSystem(TBrain brain, int maxHealth)
     {
         this.brain = brain;
         this.maxHealth = maxHealth;
@@ -44,6 +44,7 @@ public abstract class HealthSystem<TBrain> : MonoBehaviour where TBrain : class
 
         HitEffect(hitData);
 
+        OnHit?.Invoke(currentHealth);
         if (currentHealth <= 0)
         {
             Die();

@@ -20,5 +20,7 @@ public class EnemyInGameData
     public float visionRange;
     [BoxGroup("Attack System")]
     public IDamageable target;
-    
+    [BoxGroup("Attack System")]
+    public float attackAngle;
+
 }
